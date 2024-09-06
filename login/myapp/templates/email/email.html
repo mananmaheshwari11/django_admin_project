@@ -1,0 +1,14 @@
+<!-- templates/emails/activation_email.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Activate Your Account</title>
+</head>
+<body>
+    <p>Hi {{ Register.object.name }},</p>
+    <p>Thanks for signing up! Please click the link below to activate your account:</p>
+    <a href="{{ activation_link }}">Activate your account</a>
+    <p>If you didn't request this, please ignore this email.</p>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Update A Student</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+</script>
+<script>
+  function confirmDelete() {
+        var password = prompt("Please enter your password to confirm deletion:");
+        if (password) {
+            document.getElementById("passwordInput").value = password;
+            document.getElementById("deleteForm").submit();
+        }
+    }
+</script>
+  {% if toast %}
+  <div class="alert alert-dismissible {{ message.tags }} col-md-2 m-1 p-1 bg-danger" role="alert">
+    <div class="text-white">{{ message | safe }}</div>
+    <button type="button" class="btn-close col-md-2 m-1 p-1" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+    <h1 class="text-center bg-secondary m-2 p-2">Update Student</h1>
+    <center>
+    <div class="col-md-7 ">
+    <form method="post" action="/makeupdate/{{student.id}}" class="form" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        <input type="email" 
+        class="form-control border-2" 
+        id="email"
+        name="email"
+        value="{{student.email}}"
+        placeholder="Email Address"
+        aria-describedby="emailHelp"
+        disabled
+        >
+      </div>
+      <div class="mb-3">
+          <input type="text" 
+          class="form-control border-2" 
+          id="name"
+          name="name"
+          value="{{student.name}}"
+          placeholder="Update First Name"
+          aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <input type="text" 
+          class="form-control border-2" 
+          id="last_name"
+          name="last_name"
+          value="{{student.last_name}}"
+          placeholder="Update Last Name"
+          aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <input type="number" 
+          class="form-control border-2"  
+          id="mobile"
+          name="mobile"
+          value="{{student.mobile}}"
+          placeholder="Update mobile number"
+          aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <input type="file" 
+          class="form-control border-2"
+          name="image"
+           id="image"
+           value="{{image}}"
+           placeholder="Enter Image"
+           required>
+          <div>
+          <label>Preview Image</label><br>
+          <img src="{{student.image.url}}" class="h-15 w-50">
+        </div>
+          </div>
+      <div class="mb-3">
+        <input type="password" 
+        class="form-control border-2"
+        name="password"
+         id="password"
+         value="{{password}}"
+         placeholder="Enter Password to Update">
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+      </div>
+      <div>
+      <form id="deleteForm" method="post" action="/delete/{{student.id}}">
+      {% csrf_token %}
+        <input type="hidden" id="passwordInput" name="password">
+        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete Account</button>
+    </form>
+  </div>
+  </center>
+  </body>
+</html>

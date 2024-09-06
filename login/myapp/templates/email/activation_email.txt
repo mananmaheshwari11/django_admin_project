@@ -1,0 +1,8 @@
+<!-- templates/emails/activation_email.txt -->
+
+Hi {{ user.username }},
+
+Thanks for signing up! Please click the link below to activate your account:
+{{ activation_link }}
+
+If you didn't request this, please ignore this email.
